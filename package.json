@@ -1,0 +1,28 @@
+{
+  "name": "wiki-security-persona",
+  "description": "Mozilla Persona plugin for Federated Wiki node server",
+  "version": "0.0.1",
+  "author": "Paul Rodwell <paul.rodwell@btinternet.com> (http://rodwell.me/)",
+  "license": "MIT",
+  "dependencies": {
+    "coffee-script": "1.9",
+    "qs": "3.1"
+  },
+  "devDependencies": {
+    "coffeeify": "*",
+    "grunt": "0.4",
+    "grunt-browserify": "~4",
+    "grunt-contrib-watch": "0.6",
+    "grunt-git-authors": "~3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fedwiki/wiki-security-persona.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fedwiki/wiki-security-persona/issues"
+  },
+  "engines": {
+    "node": ">=0.10"
+  }
+}
