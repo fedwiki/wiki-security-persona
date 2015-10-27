@@ -83,7 +83,7 @@ module.exports = exports = (log, loga, argv) ->
       return false
 
 
-  security.login = ->
+  security.login = (updateOwner) ->
     (req, res) ->
       sent = false
       fail = ->
@@ -127,6 +127,7 @@ module.exports = exports = (log, loga, argv) ->
               console.log "Verified Email: ", verified.email
               if owner is ''
                 setOwner verified.email, ->
+                  updateOwner getOwner()
                   originalRes.send JSON.stringify {
                     status: 'okay',
                     email: verified.email,

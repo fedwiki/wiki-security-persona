@@ -15,15 +15,13 @@
 
 update_footer = (owner, authUser) ->
   # we update the state of both the owner, and login/out in the footer
-  console.log "Owner: ", owner
-  console.log "authUser: ", authUser
 
   $('#site-owner').empty()
 
   if owner
     $('#site-owner').append "Site Owned by: <span id='site-owner' style='text-transform:capitalize;'>#{owner}</span>"
 
-  $('#security > a').remove()
+  $('#security').empty()
 
   if authUser is true
     $('#security').append "<a href='#' class='persona-button' id='persona-logout-btn'><span>Sign Out</span></a>"
@@ -69,7 +67,6 @@ setup = (user) ->
           verified = JSON.parse(verified)
           if "okay" is verified.status
             # logged in user is either the owner, or site has not been claimed
-            console.log "Okay: ", JSON.stringify(verified)
             authUser = true
             owner = verified.owner
             update_footer owner, authUser
