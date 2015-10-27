@@ -50,13 +50,25 @@ module.exports = exports = (log, loga, argv) ->
         owner = ''
         cb()
 
-  security.getOwner = ->
+  security.getOwner = getOwner = ->
     if ~owner.indexOf '@'
       ownerName = owner.substr(0, owner.indexOf('@'))
     else
       ownerName = owner
     ownerName = ownerName.split('.').join(" ")
     ownerName
+
+  security.setOwner = setOwner = (id, cb) ->
+    owner = id
+    fs.exists idFile, (exists) ->
+      if !exists
+        fs.writeFile(idFile, id, (err) ->
+          if err then return cb err
+          console.log "Claiming site for #{id}"
+          owner = id
+          cb())
+      else
+        cb()
 
   security.getUser = (req) ->
     if req.session.email
@@ -71,7 +83,7 @@ module.exports = exports = (log, loga, argv) ->
       return false
 
 
-  security.login = () ->
+  security.login = ->
     (req, res) ->
       sent = false
       fail = ->
@@ -113,10 +125,19 @@ module.exports = exports = (log, loga, argv) ->
             if "okay" is verified.status and !!verified.email
               req.session.email = verified.email
               console.log "Verified Email: ", verified.email
-              originalRes.send JSON.stringify {
-                status: 'okay',
-                email: verified.email
-              }
+              if owner is ''
+                setOwner verified.email, ->
+                  originalRes.send JSON.stringify {
+                    status: 'okay',
+                    email: verified.email,
+                    owner: getOwner()
+                  }
+              else
+                originalRes.send JSON.stringify {
+                  status: 'okay',
+                  email: verified.email,
+                  owner: getOwner()
+                }
             else
               # verify has failed, return statusCode for client to handle...
               console.log "ERROR: Verify Failed :: ", JSON.stringify(verified)

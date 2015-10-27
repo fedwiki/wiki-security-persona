@@ -15,8 +15,13 @@
 
 update_footer = (owner, authUser) ->
   # we update the state of both the owner, and login/out in the footer
+  console.log "Owner: ", owner
+  console.log "authUser: ", authUser
 
-  $('#site-owner').replaceWith "<span id='site-owner' style='text-transform:capitalize;'>#{owner}</span>"
+  $('#site-owner').empty()
+
+  if owner
+    $('#site-owner').append "Site Owned by: <span id='site-owner' style='text-transform:capitalize;'>#{owner}</span>"
 
   $('#security > a').remove()
 
@@ -64,7 +69,9 @@ setup = (user) ->
           verified = JSON.parse(verified)
           if "okay" is verified.status
             # logged in user is either the owner, or site has not been claimed
+            console.log "Okay: ", JSON.stringify(verified)
             authUser = true
+            owner = verified.owner
             update_footer owner, authUser
           else if "wrong-address" is verified.status
             # logged in user is not the owner
