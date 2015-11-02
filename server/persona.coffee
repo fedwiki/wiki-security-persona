@@ -165,6 +165,14 @@ module.exports = exports = (log, loga, argv) ->
     (req, res) ->
       console.log "Logout..."
 
+  security.defineRoutes = (app, cors, updateOwner) ->
+
+    app.post '/login', cors, security.login(updateOwner)
+
+    app.post '/logout', cors, (req, res) ->
+      req.session.reset()
+      security.logout()
+      res.send("OK")
 
 
 

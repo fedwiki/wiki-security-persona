@@ -68,7 +68,7 @@ setup = (user) ->
           if "okay" is verified.status
             # logged in user is either the owner, or site has not been claimed
             authUser = true
-            owner = verified.owner
+            owner = verified.email
             update_footer owner, authUser
           else if "wrong-address" is verified.status
             # logged in user is not the owner
@@ -96,7 +96,6 @@ setup = (user) ->
 
       onready: ->
         # It's safe to render, Persona and the wiki's notion of a session agree
-
         update_footer owner, authUser
 
 
