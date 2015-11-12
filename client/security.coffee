@@ -68,7 +68,7 @@ setup = (user) ->
           if "okay" is verified.status
             # logged in user is either the owner, or site has not been claimed
             authUser = true
-            owner = verified.email
+            owner = verified.owner
             update_footer owner, authUser
           else if "wrong-address" is verified.status
             # logged in user is not the owner
