@@ -1,7 +1,7 @@
 {
   "name": "wiki-security-persona",
   "description": "Mozilla Persona plugin for Federated Wiki node server",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Paul Rodwell <paul.rodwell@btinternet.com> (http://rodwell.me/)",
   "license": "MIT",
   "dependencies": {
