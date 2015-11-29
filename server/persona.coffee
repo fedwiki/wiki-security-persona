@@ -77,7 +77,7 @@ module.exports = exports = (log, loga, argv) ->
       return ''
 
   security.isAuthorized = (req) ->
-    if owner == req.session.email
+    if [req.session.email, ''].indexOf(owner) > -1
       return true
     else
       return false
