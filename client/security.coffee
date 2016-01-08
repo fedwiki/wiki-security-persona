@@ -16,10 +16,9 @@
 update_footer = (owner, authUser) ->
   # we update the state of both the owner, and login/out in the footer
 
-  $('footer > #site-owner').empty()
-
+  # only change the owner if we have been passed an owner
   if owner
-    $('footer > #site-owner').append "Site Owned by: <span id='site-owner' style='text-transform:capitalize;'>#{owner}</span>"
+    $('footer > #site-owner').html("Site Owned by: <span id='site-owner' style='text-transform:capitalize;'>#{owner}</span>")
 
   $('footer > #security').empty()
 
