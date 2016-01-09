@@ -16,21 +16,20 @@
 update_footer = (owner, authUser) ->
   # we update the state of both the owner, and login/out in the footer
 
-  $('#site-owner').empty()
-
+  # only change the owner if we have been passed an owner
   if owner
-    $('#site-owner').append "Site Owned by: <span id='site-owner' style='text-transform:capitalize;'>#{owner}</span>"
+    $('footer > #site-owner').html("Site Owned by: <span id='site-owner' style='text-transform:capitalize;'>#{owner}</span>")
 
-  $('#security').empty()
+  $('footer > #security').empty()
 
   if authUser is true
-    $('#security').append "<a href='#' class='persona-button' id='persona-logout-btn'><span>Sign Out</span></a>"
-    $('#persona-logout-btn').click (e) ->
+    $('footer > #security').append "<a href='#' class='persona-button' id='persona-logout-btn'><span>Sign Out</span></a>"
+    $('footer > #security > #persona-logout-btn').click (e) ->
       e.preventDefault()
       navigator.id.logout {}
   else
-    $('#security').append "<a href='#' class='persona-button' id='persona-login-btn'><span>Sign in with your Email</span></a>"
-    $('#persona-login-btn').click (e) ->
+    $('footer > #security').append "<a href='#' class='persona-button' id='persona-login-btn'><span>Sign in with your Email</span></a>"
+    $('footer > #security > #persona-login-btn').click (e) ->
       e.preventDefault()
       navigator.id.request {}
 
