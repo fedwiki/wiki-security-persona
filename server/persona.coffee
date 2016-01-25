@@ -26,6 +26,9 @@ module.exports = exports = (log, loga, argv) ->
 
   owner = ''
 
+  admin = argv.admin
+  console.log 'Wiki admin: ', admin
+
   # save the location of the status directory
   statusDir = argv.status
 
@@ -78,6 +81,14 @@ module.exports = exports = (log, loga, argv) ->
 
   security.isAuthorized = (req) ->
     if [req.session.email, ''].indexOf(owner) > -1
+      return true
+    else
+      return false
+
+  security.isAdmin = (req) ->
+    if !(req.session.email? or admin?)
+      return false
+    if req.session.email is admin
       return true
     else
       return false
