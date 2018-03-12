@@ -1,3 +1,5 @@
+__*On November 30th, 2016, Mozilla shut down the persona.org services.*__
+
 # Federated Wiki - Security Plug-in: Persona
 
 This security plug-in provides support for authentication using
